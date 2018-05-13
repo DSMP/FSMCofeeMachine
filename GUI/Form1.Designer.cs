@@ -105,7 +105,7 @@
             this.herbataButton.TabIndex = 6;
             this.herbataButton.Text = "Herbata 5 zl";
             this.herbataButton.UseVisualStyleBackColor = true;
-            this.herbataButton.Click += new System.EventHandler(this.herbataButton_Click);
+            this.herbataButton.Click += new System.EventHandler(this.productButton_Click);
             // 
             // kawaButton
             // 
@@ -115,7 +115,7 @@
             this.kawaButton.TabIndex = 7;
             this.kawaButton.Text = "kawa 7 zl";
             this.kawaButton.UseVisualStyleBackColor = true;
-            this.kawaButton.Click += new System.EventHandler(this.herbataButton_Click);
+            this.kawaButton.Click += new System.EventHandler(this.productButton_Click);
             // 
             // restLabel
             // 

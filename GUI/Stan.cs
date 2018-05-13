@@ -8,7 +8,7 @@ namespace GUI
     {
         public List<State> NextStates { get; set; }
         public string Name { get; private set; }
-        int _value;
+        public int Value { get; private set; }
         public int Rest { get; private set; }
         public string Proudct { get; set; }
         public State()
@@ -18,24 +18,28 @@ namespace GUI
         public State(string name, int value, List<State> nexts) : this()
         {
             Name = name;
-            _value = value;
+            Value = value;
             NextStates = nexts;
         }
         public State(string name, int value) : this()
         {
             Name = name;
-            _value = value;
+            Value = value;
         }
         public void SetRest(int rest)
         {
-            Rest = rest;            
+            Rest = rest;
+        }
+        public int GetRest(int productValue)
+        {
+            return Value - productValue;
         }
         public State NextState(int value)
         {
-            value = value + _value;
+            value = value + Value;
             foreach (var nextState in NextStates)
             {
-                if (nextState._value.Equals(value))
+                if (nextState.Value.Equals(value))
                 {
                     return nextState;
                 }

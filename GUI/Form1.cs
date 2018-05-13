@@ -14,6 +14,7 @@ namespace GUI
     {
         State initialState;
         int sumOfCoins = 0;
+        string _product;
         List<State> savedStates;
         StringBuilder sb;
         public Form1()
@@ -29,13 +30,14 @@ namespace GUI
         private void coin_Click(object sender, EventArgs e)
         {
             savedStates.Add(initialState);
-            StateLabel.Text = "Jestes w stanie: " + initialState.Name;
             int value = Convert.ToInt32((sender as Button).Text.Split(' ')[0]);
 
             sumOfCoins += value;
             sb.Append(" -> ").Append(initialState.Name);
             StatesLabel.Text = sb.ToString();
             initialState = initialState.NextState(value);
+            StateLabel.Text = "Jestes w stanie: " + initialState.Name;
+            SumLabel.Text = "Sum: " + sumOfCoins.ToString();
             if (initialState.Proudct?.Equals("Herbata")??false)
             {
                 herbataButton.Enabled = true;
@@ -43,12 +45,15 @@ namespace GUI
             if (initialState.Proudct?.Equals("Kawa")??false)
             {
                 kawaButton.Enabled = true;
+                herbataButton.Enabled = true;
             }
         }
 
-        private void herbataButton_Click(object sender, EventArgs e)
+        private void productButton_Click(object sender, EventArgs e)
         {
-            int value = Convert.ToInt32((sender as Button).Text.Split(' ')[1]) == 5 ? 1 : 2;
+            Button buttonClicked = (sender as Button);
+            int value = Convert.ToInt32(buttonClicked.Text.Split(' ')[1]) == 5 ? 1 : 2;
+            _product = buttonClicked.Text.Split(' ')[0];
             finishApp();
         }
         public void finishApp()
@@ -56,8 +61,8 @@ namespace GUI
             sb.Append(" -> ").Append(initialState.Name);
             StatesLabel.Text = sb.ToString();
             SumLabel.Text = "Sum: " + sumOfCoins.ToString();
-            productLabel.Text = "Wydano: " + initialState.Proudct;
-            restLabel.Text = "Reszty: " + initialState.Rest;
+            productLabel.Text = "Wydano: " + _product;
+            restLabel.Text = "Reszty: " + (_product.Equals("Herbata") ? initialState.GetRest(5) : initialState.GetRest(7));
             button1.Enabled = false;
             button2.Enabled = false;
             button3.Enabled = false;
